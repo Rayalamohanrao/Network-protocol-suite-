@@ -1,0 +1,49 @@
+
+#include <stdio.h>
+#include <string.h>
+
+void applicationLayer(char data[]) {
+    printf("\n--- Application Layer ---\n");
+    printf("User Data: %s\n", data);
+    printf("Application protocol: HTTP\n");
+}
+
+void transportLayer(char data[]) {
+    printf("\n--- Transport Layer ---\n");
+    printf("Protocol: TCP\n");
+    printf("Source Port: 5000\n");
+    printf("Destination Port: 80\n");
+    printf("Segment: [TCP Header] %s\n", data);
+}
+
+void internetLayer(char data[]) {
+    printf("\n--- Internet Layer ---\n");
+    printf("Protocol: IP\n");
+    printf("Source IP: 192.168.1.10\n");
+    printf("Destination IP: 192.168.1.20\n");
+    printf("Packet: [IP Header] [TCP Header] %s\n", data);
+}
+
+void networkAccessLayer(char data[]) {
+    printf("\n--- Network Access Layer ---\n");
+    printf("Protocol: Ethernet\n");
+    printf("Frame: [Ethernet Header] [IP Packet] %s\n", data);
+}
+
+int main() {
+    char data[100];
+
+    printf("NETWORK PROTOCOL SUITE SIMULATION\n");
+    printf("Enter the message to send: ");
+    fgets(data, sizeof(data), stdin);
+    data[strcspn(data, "\n")] = '\0';
+
+    applicationLayer(data);
+    transportLayer(data);
+    internetLayer(data);
+    networkAccessLayer(data);
+
+    printf("\nData encapsulation completed successfully!\n");
+
+    return 0;
+}
